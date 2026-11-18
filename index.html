@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kas Kelas 10</title>
+<style>
+  *{box-sizing:border-box;font-family:system-ui,sans-serif}
+  body{background:#f1f5f9;margin:0;padding:12px;color:#1e293b}
+  .wrap{max-width:900px;margin:auto}
+  .head{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;padding:20px;border-radius:14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+  .head h1{margin:0;font-size:22px}.head p{margin:4px 0 0;font-size:13px;opacity:.9}
+  .per{background:rgba(255,255,255,.18);padding:8px 12px;border-radius:10px;display:flex;gap:6px;align-items:center}
+  .per select,.per input{border:none;padding:6px 8px;border-radius:6px;font-weight:600;font-size:13px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+  .sc{background:#fff;padding:14px;border-radius:12px;border:1px solid #e2e8f0}
+  .sc small{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase}
+  .sc div{font-size:20px;font-weight:800;margin-top:4px}
+  .g div{color:#10b981}.r div{color:#ef4444}.b div{color:#3b82f6}
+  .box{background:#fff;padding:16px;border-radius:14px;border:1px solid #e2e8f0;margin-bottom:16px}
+  .bh{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .bh h2{margin:0;font-size:16px}
+  .dt{font-size:12px;background:#f1f5f9;padding:4px 10px;border-radius:20px;color:#475569}
+  .tw{overflow-x:auto;border:1px solid #e2e8f0;border-radius:10px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{background:#f8fafc;color:#64748b;padding:10px 6px;border-bottom:1px solid #e2e8f0}
+  td{padding:9px 6px;border-bottom:1px solid #e2e8f0;text-align:center}
+  td.nm{text-align:left;font-weight:600;white-space:nowrap}
+  .tm{display:block;width:68px;margin:4px auto 0;font-size:11px;padding:2px;border:1px solid #cbd5e1;border-radius:4px;text-align:center}
+  input[type=checkbox]{width:18px;height:18px;accent-color:#4f46e5}
+  .bd{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700}
+  .ok{background:#ecfdf5;color:#10b981}.no{background:#fef3c7;color:#d97706}
+  .fg{display:grid;grid-template-columns:135px 1fr 125px auto;gap:8px;margin-bottom:12px}
+  @media(max-width:600px){.fg{grid-template-columns:1fr}}
+  .fg input{padding:9px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px}
+  button{padding:9px 14px;border:none;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer}
+  .bp{background:#4f46e5;color:#fff}.bw{background:#22c55e;color:#fff;padding:11px 18px}.bdl{background:#fef2f2;color:#ef4444;padding:5px 8px}.brs{background:#e2e8f0;color:#475569}
+  .act{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:16px 0 24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div><h1>📘 Kas Kelas 10</h1><p>11 Murid • Rp3.000 / Minggu</p></div>
+    <div class="per">
+      <select id="bln" onchange="updPer()"><option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option>Agustus</option><option>September</option><option>Oktober</option><option selected>November</option><option>Desember</option></select>
+      <input type="number" id="thn" value="2026" style="width:70px" onchange="updPer()">
+    </div>
+  </div>
+  <div class="stats">
+    <div class="sc g"><small>Kas Masuk</small><div id="tm">Rp0</div></div>
+    <div class="sc r"><small>Pengeluaran</small><div id="tk">Rp0</div></div>
+    <div class="sc b"><small>Sisa Saldo</small><div id="ts">Rp0</div></div>
+  </div>
+  <div class="box">
+    <div class="bh"><h2>1. Iuran Murid (<span id="lp">November 2026</span>)</h2><span class="dt" id="td"></span></div>
+    <div class="tw"><table><thead id="hk"></thead><tbody id="bk"></tbody></table></div>
+    <button class="bp" style="margin-top:10px" onclick="addM()">+ Tambah Minggu</button>
+  </div>
+  <div class="box">
+    <div class="bh"><h2>2. Pengeluaran Kas</h2></div>
+    <div class="fg">
+      <input type="date" id="to">
+      <input type="text" id="ko" placeholder="Keperluan (misal: Beli spidol)">
+      <input type="number" id="no" placeholder="Nominal (Rp)">
+      <button class="bp" onclick="addO()">+ Simpan</button>
+    </div>
+    <div class="tw"><table><thead><tr><th>No</th><th>Tgl</th><th style="text-align:left">Keterangan</th><th>Nominal</th><th>Aksi</th></tr></thead><tbody id="bo"></tbody></table></div>
+  </div>
+  <div class="act">
+    <button class="bw" onclick="wa()">📲 Kirim Rekap ke WhatsApp</button>
+    <button class="brs" onclick="rst()">🔄 Reset</button>
+  </div>
+</div>
+<script>
+  var T=3000,K="kas10_v6",N=["Aininda","Desi","Devin","Jaka","Haifa","Hilman","Alfa","Pajar","Rifky","Siska","Winda"];
+  var d=JSON.parse(localStorage.getItem(K))||{b:"November",t:2026,m:4,tm:["Mgg 1","Mgg 2","Mgg 3","Mgg 4"],s:N.map(function(n){return{n:n,b:[0,0,0,0]}}),k:[]};
+  function rp(n){return"Rp"+n.toLocaleString("id-ID")}
+  function sv(){localStorage.setItem(K,JSON.stringify(d));dr()}
+  function updPer(){d.b=document.getElementById("bln").value;d.t=document.getElementById("thn").value;sv()}
+  function updTm(i,v){d.tm[i]=v;sv()}
+  function dr(){
+    document.getElementById("lp").innerText=d.b+" "+d.t;
+    var h="<tr><th>No</th><th style='text-align:left'>Nama</th>";
+    for(var m=0;m<d.m;m++)h+="<th>M"+(m+1)+"<input class='tm' value='"+(d.tm[m]||"Mgg "+(m+1))+"' onchange='updTm("+m+",this.value)'></th>";
+    document.getElementById("hk").innerHTML=h+"<th>Total</th><th>Status</th></tr>";
+    var b="",inTot=0;
+    d.s.forEach(function(s,i){
+      var jml=0,c="";
+      for(var j=0;j<d.m;j++){if(s.b[j])jml++;c+="<td><input type='checkbox' "+(s.b[j]?"checked":"")+" onchange='ck("+i+","+j+")'></td>"}
+      var sub=jml*T;inTot+=sub;
+      b+="<tr><td>"+(i+1)+"</td><td class='nm'>"+s.n+"</td>"+c+"<td><b>"+rp(sub)+"</b></td><td><span class='bd "+(jml===d.m?"ok'>Lunas":"no'>"+jml+"/"+d.m)+"</span></td></tr>";
+    });
+    document.getElementById("bk").innerHTML=b;
+    var bo="",outTot=0;
+    if(!d.k.length)bo="<tr><td colspan='5' style='color:#94a3b8'>Belum ada pengeluaran</td></tr>";
+    else d.k.forEach(function(o,i){outTot+=o.n;bo+="<tr><td>"+(i+1)+"</td><td>"+o.t+"</td><td class='nm'>"+o.k+"</td><td style='color:#ef4444'><b>-"+rp(o.n)+"</b></td><td><button class='bdl' onclick='delO("+i+")'>Hapus</button></td></tr>"});
+    document.getElementById("bo").innerHTML=bo;
+    document.getElementById("tm").innerText=rp(inTot);
+    document.getElementById("tk").innerText=rp(outTot);
+    document.getElementById("ts").innerText=rp(inTot-outTot);
+  }
+  function ck(i,j){d.s[i].b[j]=d.s[i].b[j]?0:1;sv()}
+  function addM(){d.m++;d.tm.push("Mgg "+d.m);d.s.forEach(function(s){s.b.push(0)});sv()}
+  function addO(){
+    var tr=document.getElementById("to").value,k=document.getElementById("ko").value.trim(),n=parseInt(document.getElementById("no").value,10);
+    if(!k||!n||n<=0)return alert("Isi keterangan & nominal!");
+    var ti=tr?new Date(tr).toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"}):"-";
+    d.k.push({t:ti,k:k,n:n});document.getElementById("ko").value="";document.getElementById("no").value="";sv();
+  }
+  function delO(i){if(confirm("Hapus?"))d.k.splice(i,1),sv()}
+  function rst(){if(confirm("Reset semua data?"))localStorage.removeItem(K),location.reload()}
+  function wa(){
+    var t="*📊 LAPORAN KAS KELAS 10*\n*Periode: "+d.b+" "+d.t+"*\n\n*Pemasukan:*\n",im=0,om=0;
+    d.s.forEach(function(s,i){var j=s.b.filter(Boolean).length,sb=j*T;im+=sb;t+=(i+1)+". "+s.n+": "+rp(sb)+(j===d.m?" ✅":" ("+j+"/"+d.m+")")+"\n"});
+    t+="\n*Pengeluaran:*\n"+(d.k.length?"":"- Nihil\n");
+    d.k.forEach(function(o,i){om+=o.n;t+=(i+1)+". ["+o.t+"] "+o.k+": -"+rp(o.n)+"\n"});
+    t+="\n*Masuk:* "+rp(im)+"\n*Keluar:* "+rp(om)+"\n*Saldo Akhir:* "+rp(im-om);
+    window.open("https://wa.me"+encodeURIComponent(t),"_blank");
+  }
+  var nw=new Date();
+  document.getElementById("td").innerText="📅 "+nw.toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  document.getElementById("to").value=nw.toISOString().split("T")[0];
+  document.getElementById("bln").value=d.b;document.getElementById("thn").value=d.t;
+  dr();
+</script>
+</body>
+</html>
